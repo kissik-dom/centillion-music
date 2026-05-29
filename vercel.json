@@ -2,7 +2,7 @@
   "buildCommand": "vite build",
   "rewrites": [
     {
-      "source": "/((?!assets/).*)",
+      "source": "/((?!api/|assets/).*)",
       "destination": "/index.html"
     }
   ]

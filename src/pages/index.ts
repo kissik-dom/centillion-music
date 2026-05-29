@@ -1,5 +1,9 @@
-export { DashboardPage } from "./DashboardPage";
 export { LandingPage } from "./LandingPage";
 export { LoginPage } from "./LoginPage";
-export { SettingsPage } from "./SettingsPage";
 export { SignupPage } from "./SignupPage";
+export { DashboardPage } from "./DashboardPage";
+export { StudioPage } from "./StudioPage";
+export { BeatsPage } from "./BeatsPage";
+export { LibraryPage } from "./LibraryPage";
+export { SongPage } from "./SongPage";
+export { SettingsPage } from "./SettingsPage";

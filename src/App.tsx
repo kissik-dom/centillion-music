@@ -7,11 +7,15 @@ import { PublicOnlyRoute } from "./components/PublicOnlyRoute";
 import { Toaster } from "./components/ui/sonner";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import {
+  BeatsPage,
   DashboardPage,
   LandingPage,
+  LibraryPage,
   LoginPage,
   SettingsPage,
   SignupPage,
+  SongPage,
+  StudioPage,
 } from "./pages";
 
 function App() {
@@ -31,6 +35,10 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<AppLayout />}>
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/studio" element={<StudioPage />} />
+              <Route path="/beats" element={<BeatsPage />} />
+              <Route path="/library" element={<LibraryPage />} />
+              <Route path="/song/:id" element={<SongPage />} />
               <Route path="/settings" element={<SettingsPage />} />
             </Route>
           </Route>

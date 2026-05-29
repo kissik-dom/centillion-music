@@ -1,74 +1,113 @@
-import { useAuthActions } from "@convex-dev/auth/react";
-import { useQuery } from "convex/react";
-import { Heart, Home, Library, LogOut, Mic, Music, Radio, Search, Settings } from "lucide-react";
+import {
+  BookOpen,
+  Crown,
+  Disc3,
+  Home,
+  Settings,
+  Wand2,
+} from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { api } from "../../convex/_generated/api";
-import { Avatar, AvatarFallback } from "./ui/avatar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "./ui/sidebar";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
 
 const navItems = [
-  { href: "/dashboard", label: "Home", icon: Home },
-  { href: "/search", label: "Search", icon: Search },
-  { href: "/library", label: "Library", icon: Library },
-  { href: "/liked", label: "Liked Songs", icon: Heart },
-  { href: "/radio", label: "Radio", icon: Radio },
-  { href: "/artists", label: "Artists", icon: Mic },
+  { title: "Dashboard", url: "/dashboard", icon: Home },
+  { title: "AI Lyrics Studio", url: "/studio", icon: Wand2 },
+  { title: "Beat Browser", url: "/beats", icon: Disc3 },
+  { title: "My Library", url: "/library", icon: BookOpen },
+];
+
+const bottomItems = [
+  { title: "Settings", url: "/settings", icon: Settings },
 ];
 
 export function AppSidebar() {
   const location = useLocation();
-  const user = useQuery(api.auth.currentUser);
-  const { signOut } = useAuthActions();
-  const { setOpenMobile } = useSidebar();
 
   return (
     <Sidebar>
-      <SidebarHeader className="border-b border-sidebar-border">
-        <Link to="/" onClick={() => setOpenMobile(false)} className="flex items-center gap-2.5 px-2 py-1 font-semibold text-lg">
-          <div className="size-8 rounded-lg bg-gradient-to-br from-[#FF8C42] to-[#E07030] flex items-center justify-center">
-            <Music className="size-4 text-white" />
+      <SidebarHeader className="border-b border-[rgba(212,175,55,0.06)] px-4 py-3">
+        <Link to="/dashboard" className="flex items-center gap-2.5">
+          <div className="size-8 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#B8960F] flex items-center justify-center">
+            <Crown className="size-4 text-[#070B14]" />
           </div>
-          <span>Centillion Music</span>
+          <div>
+            <span className="font-bold text-sm text-[#FFF8E7] tracking-tight">
+              Centillion Music
+            </span>
+            <p className="text-[9px] text-[#D4AF37]/50 tracking-wider uppercase">
+              Kissi Kingdom
+            </p>
+          </div>
         </Link>
       </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
+          <SidebarGroupLabel className="text-[#D4AF37]/40 text-[10px] tracking-wider uppercase">
+            Create
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map(item => (
-                <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton asChild isActive={location.pathname === item.href}>
-                    <Link to={item.href} onClick={() => setOpenMobile(false)}>
-                      <item.icon /><span>{item.label}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {navItems.map((item) => {
+                const isActive =
+                  location.pathname === item.url ||
+                  (item.url !== "/dashboard" &&
+                    location.pathname.startsWith(item.url));
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      className={
+                        isActive
+                          ? "bg-[rgba(212,175,55,0.1)] text-[#E5C158] border-r-2 border-[#D4AF37]"
+                          : "text-[#8B9BB4] hover:text-[#E5C158] hover:bg-[rgba(212,175,55,0.05)]"
+                      }
+                    >
+                      <Link to={item.url}>
+                        <item.icon className="size-4" />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t border-sidebar-border">
+
+      <SidebarFooter className="border-t border-[rgba(212,175,55,0.06)]">
         <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton size="lg">
-                  <Avatar className="size-8"><AvatarFallback className="bg-[#FF8C42] text-white text-sm font-medium">{user?.name?.charAt(0).toUpperCase() || "U"}</AvatarFallback></Avatar>
-                  <div className="flex flex-col items-start text-left">
-                    <span className="text-sm font-medium truncate">{user?.name || "User"}</span>
-                    <span className="text-xs text-muted-foreground truncate">{user?.email}</span>
-                  </div>
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent side="top" align="start" className="w-[--radix-dropdown-menu-trigger-width]">
-                <DropdownMenuItem asChild><Link to="/settings" onClick={() => setOpenMobile(false)}><Settings className="size-4" /> Settings</Link></DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => signOut()} className="text-destructive focus:text-destructive focus:bg-destructive/10"><LogOut className="size-4" /> Sign out</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
+          {bottomItems.map((item) => (
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton
+                asChild
+                isActive={location.pathname === item.url}
+                className={
+                  location.pathname === item.url
+                    ? "bg-[rgba(212,175,55,0.1)] text-[#E5C158]"
+                    : "text-[#8B9BB4] hover:text-[#E5C158] hover:bg-[rgba(212,175,55,0.05)]"
+                }
+              >
+                <Link to={item.url}>
+                  <item.icon className="size-4" />
+                  <span>{item.title}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
