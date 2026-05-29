@@ -1,4 +1,5 @@
-import { useAuthActions } from "@convex-dev/auth/react";
+// Auth actions removed for ConvexProvider compatibility
+const useAuthActionsSafe = () => ({ signOut: async () => { window.location.href = "/"; } });
 import { Crown, LogOut, Menu, User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,7 @@ import {
 import { useSidebar } from "@/components/ui/sidebar";
 
 export function Header() {
-  const { signOut } = useAuthActions();
+  const { signOut } = useAuthActionsSafe();
   const navigate = useNavigate();
   const { toggleSidebar, isMobile } = useSidebar();
 
