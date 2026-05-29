@@ -5,14 +5,28 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 
-const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
+const convexUrl = import.meta.env.VITE_CONVEX_URL;
+const convex = convexUrl ? new ConvexReactClient(convexUrl) : null;
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ConvexProvider client={convex}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ConvexProvider>
-  </StrictMode>,
-);
+function Root() {
+  if (!convex) {
+    return (
+      <StrictMode>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </StrictMode>
+    );
+  }
+  return (
+    <StrictMode>
+      <ConvexProvider client={convex}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ConvexProvider>
+    </StrictMode>
+  );
+}
+
+createRoot(document.getElementById("root")!).render(<Root />);
