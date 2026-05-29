@@ -2,6 +2,7 @@ export { LandingPage } from "./LandingPage";
 export { LoginPage } from "./LoginPage";
 export { SignupPage } from "./SignupPage";
 export { DashboardPage } from "./DashboardPage";
+export { CreatePage } from "./CreatePage";
 export { StudioPage } from "./StudioPage";
 export { BeatsPage } from "./BeatsPage";
 export { LibraryPage } from "./LibraryPage";

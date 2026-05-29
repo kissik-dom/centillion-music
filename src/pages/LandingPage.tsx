@@ -6,7 +6,6 @@ import {
   Headphones,
   Mic2,
   Music2,
-  PenLine,
   Sparkles,
   Wand2,
 } from "lucide-react";
@@ -15,34 +14,34 @@ import { Button } from "@/components/ui/button";
 
 const features = [
   {
+    icon: Sparkles,
+    title: "Full Song Creation",
+    desc: "Describe your song and AI creates lyrics, beats, and vocals — all in one flow.",
+  },
+  {
     icon: Wand2,
     title: "AI Lyrics Studio",
     desc: "Generate complete song lyrics with AI — any genre, any topic, no limits.",
   },
   {
     icon: Disc3,
-    title: "Beat Browser",
-    desc: "Browse and preview curated beat presets across every genre.",
-  },
-  {
-    icon: PenLine,
-    title: "Song Builder",
-    desc: "Combine your lyrics with beats to build complete song projects.",
-  },
-  {
-    icon: Music2,
-    title: "Song Library",
-    desc: "Save, organize, and manage all your created songs in one place.",
+    title: "Beat Upload & Generation",
+    desc: "Upload your own beats or let AI generate unique instrumentals from a prompt.",
   },
   {
     icon: Mic2,
-    title: "Unrestricted AI",
-    desc: "Powered by open-source models with zero content restrictions.",
+    title: "AI Voice Selection",
+    desc: "Choose male, female, or ensemble voices. Configure duets, trios, or choirs.",
+  },
+  {
+    icon: Music2,
+    title: "40+ Genres & Styles",
+    desc: "From trap to orchestra, trance to gospel — every genre and mood you can imagine.",
   },
   {
     icon: Headphones,
-    title: "Real-Time Preview",
-    desc: "Hear your beats played back instantly with Web Audio synthesis.",
+    title: "Unrestricted & Open Source",
+    desc: "Powered by open-source AI models with zero content restrictions.",
   },
 ];
 
@@ -112,8 +111,9 @@ export function LandingPage() {
                 Royal Kissi Kingdom
               </p>
               <p className="text-lg md:text-xl text-[#8B9BB4] text-center max-w-2xl mb-10 leading-relaxed">
-                Create music with the power of AI. Write lyrics, browse beats,
-                and build songs — unrestricted, open-source, and built for
+                Create full songs with the power of AI. Generate lyrics,
+                beats, and vocals — upload your own sounds, choose voices,
+                pick from 40+ genres. Unrestricted, open-source, built for
                 creators who refuse limits.
               </p>
 

@@ -3,6 +3,7 @@ import {
   Crown,
   Disc3,
   Home,
+  Music,
   Settings,
   Wand2,
 } from "lucide-react";
@@ -22,7 +23,8 @@ import {
 
 const navItems = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
-  { title: "AI Lyrics Studio", url: "/studio", icon: Wand2 },
+  { title: "Create Song", url: "/create", icon: Music, primary: true },
+  { title: "Quick Lyrics", url: "/studio", icon: Wand2 },
   { title: "Beat Browser", url: "/beats", icon: Disc3 },
   { title: "My Library", url: "/library", icon: BookOpen },
 ];
@@ -55,7 +57,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="text-[#D4AF37]/40 text-[10px] tracking-wider uppercase">
-            Create
+            Studio
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -64,6 +66,7 @@ export function AppSidebar() {
                   location.pathname === item.url ||
                   (item.url !== "/dashboard" &&
                     location.pathname.startsWith(item.url));
+                const isPrimary = "primary" in item && item.primary;
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
@@ -72,7 +75,9 @@ export function AppSidebar() {
                       className={
                         isActive
                           ? "bg-[rgba(212,175,55,0.1)] text-[#E5C158] border-r-2 border-[#D4AF37]"
-                          : "text-[#8B9BB4] hover:text-[#E5C158] hover:bg-[rgba(212,175,55,0.05)]"
+                          : isPrimary
+                            ? "text-[#D4AF37] hover:text-[#E5C158] hover:bg-[rgba(212,175,55,0.08)] font-semibold"
+                            : "text-[#8B9BB4] hover:text-[#E5C158] hover:bg-[rgba(212,175,55,0.05)]"
                       }
                     >
                       <Link to={item.url}>

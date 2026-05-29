@@ -8,6 +8,7 @@ import { Toaster } from "./components/ui/sonner";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import {
   BeatsPage,
+  CreatePage,
   DashboardPage,
   LandingPage,
   LibraryPage,
@@ -35,6 +36,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<AppLayout />}>
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/create" element={<CreatePage />} />
               <Route path="/studio" element={<StudioPage />} />
               <Route path="/beats" element={<BeatsPage />} />
               <Route path="/library" element={<LibraryPage />} />

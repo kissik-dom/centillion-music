@@ -5,6 +5,7 @@ import {
   Crown,
   Disc3,
   FileText,
+  Music,
   Music2,
   PenLine,
   Sparkles,
@@ -23,16 +24,23 @@ export function DashboardPage() {
 
   const quickActions = [
     {
-      icon: Wand2,
-      title: "AI Lyrics Studio",
-      desc: "Generate lyrics with AI",
-      href: "/studio",
+      icon: Music,
+      title: "Create Song",
+      desc: "Full AI music creation studio",
+      href: "/create",
       accent: true,
     },
     {
+      icon: Wand2,
+      title: "Quick Lyrics",
+      desc: "Generate lyrics fast",
+      href: "/studio",
+      accent: false,
+    },
+    {
       icon: Disc3,
-      title: "Browse Beats",
-      desc: "Preview beat presets",
+      title: "Beat Browser",
+      desc: "Browse beat presets",
       href: "/beats",
       accent: false,
     },
@@ -63,14 +71,37 @@ export function DashboardPage() {
               Welcome to Centillion Music
             </h1>
             <p className="text-sm text-[#8B9BB4]">
-              Create, build, and own your music
+              AI-powered music creation · No restrictions
             </p>
           </div>
         </div>
       </div>
 
+      {/* Create Song CTA */}
+      <Link
+        to="/create"
+        className="block mb-6 rounded-xl bg-gradient-to-r from-[#D4AF37]/15 via-[#0D1524] to-[#D4AF37]/10 border border-[#D4AF37]/25 p-6 group hover:border-[#D4AF37]/50 transition-all"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="size-14 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#B8960F] flex items-center justify-center gold-glow">
+              <Music className="size-7 text-[#070B14]" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-[#E5C158] group-hover:text-[#FFF8E7] transition-colors">
+                Create a New Song
+              </h2>
+              <p className="text-sm text-[#8B9BB4]">
+                Full song creation — lyrics, beats, vocals, mixing — all AI-powered
+              </p>
+            </div>
+          </div>
+          <ArrowRight className="size-5 text-[#D4AF37] group-hover:translate-x-1 transition-transform" />
+        </div>
+      </Link>
+
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         {quickActions.map((action) => (
           <Link
             key={action.href}
@@ -166,16 +197,16 @@ export function DashboardPage() {
             <p className="text-[#8B9BB4] mb-1">No songs yet</p>
             <p className="text-xs text-[#4A5568]">
               Create your first song in the{" "}
-              <Link to="/studio" className="text-[#D4AF37] hover:underline">
-                AI Lyrics Studio
+              <Link to="/create" className="text-[#D4AF37] hover:underline">
+                Creation Studio
               </Link>
             </p>
           </div>
         ) : (
           <div className="divide-y divide-[rgba(212,175,55,0.04)]">
-            {recentSongs.slice(0, 5).map((song: any) => (
+            {recentSongs.slice(0, 5).map((song: Record<string, unknown>) => (
               <Link
-                key={song._id}
+                key={song._id as string}
                 to={`/song/${song._id}`}
                 className="flex items-center gap-4 px-5 py-3 hover:bg-[rgba(212,175,55,0.03)] transition-colors group"
               >
@@ -184,10 +215,10 @@ export function DashboardPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-[#E8E4DC] truncate group-hover:text-[#E5C158] transition-colors">
-                    {song.title}
+                    {song.title as string}
                   </p>
                   <p className="text-xs text-[#4A5568] truncate">
-                    {song.genre}
+                    {song.genre as string}
                     {song.mood ? ` · ${song.mood}` : ""}
                   </p>
                 </div>
