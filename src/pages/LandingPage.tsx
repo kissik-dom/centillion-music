@@ -1,4 +1,3 @@
-import { Authenticated, Unauthenticated } from "convex/react";
 import {
   ArrowRight,
   Crown,
@@ -48,10 +47,6 @@ const features = [
 export function LandingPage() {
   return (
     <>
-      <Authenticated>
-        <Navigate to="/dashboard" replace />
-      </Authenticated>
-      <Unauthenticated>
         <div className="min-h-screen flex flex-col bg-[#070B14]">
           {/* Nav */}
           <nav className="flex items-center justify-between px-6 py-4 border-b border-[rgba(212,175,55,0.08)]">
@@ -200,7 +195,6 @@ export function LandingPage() {
             </p>
           </footer>
         </div>
-      </Unauthenticated>
     </>
   );
 }
