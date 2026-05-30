@@ -90,5 +90,6 @@
     "typescript": "~5.9.3",
     "vite": "^7.2.4"
   },
-  "_deployTrigger": "2026-05-30T00:37"
+  "_deployTrigger": "2026-05-30T00:37",
+  "_buildTrigger": "env-vars-set-2026-05-30"
 }
